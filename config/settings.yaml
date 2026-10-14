@@ -1,0 +1,58 @@
+# SahelCast settings. Every path is relative to the repository root.
+# Change values here, not in the code.
+
+paths:
+  lake_metadata: data/lake/metadata.ducklake   # DuckLake catalog (a small DuckDB file)
+  lake_data: data/lake/files/                  # Parquet data files written by DuckLake
+  raw: data/raw                                # raw API responses, kept for replay and audit
+  artifacts: data/artifacts                    # backtest outputs and serving tables
+  site: site                                   # static demo website (GitHub Pages)
+
+openmeteo:
+  nwp_model: ecmwf_ifs025                      # weather model used as forecast covariates
+  satellite_model: eumetsat_sarah3             # "observed" irradiance: SARAH-3, 1983 to ~2 days ago
+  reanalysis_model: best_match                 # temperature and wind for the PV simulation
+  history_start: "2024-03-01"                  # Previous Runs archive starts ~Jan–Feb 2024
+  history_end: null                            # null = 7 days ago
+  chunk_days: 31                               # one request per plant per month of data
+  lead_days: [1, 2]                            # which *_previous_dayN values to store
+  requests_per_minute: 30                      # stay far below the free-tier limit (600/min)
+
+forecast:
+  issue_hour_utc: 12          # the day-ahead forecast is issued every day at 12:00 UTC ...
+  lead_day: 2                 # ... using *_previous_day2 NWP values, which exist by then
+  obs_cutoff_hours: 36        # SARAH-3 arrives ~2 days late: at 12:00 on day D, data end at D-1 00:00
+  quantiles: [0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95]
+  context_days: 28            # history shown to Chronos-2 (persistence uses the last 14 days)
+  models: [persistence, physical, lightgbm, chronos2]
+  chronos_model_id: amazon/chronos-2   # or autogluon/chronos-2-small (28M, faster)
+  device: cpu                 # "mps" uses the Apple Silicon GPU
+
+calibration:
+  window_days: 60             # conformal calibration uses the last 60 days of errors ...
+  lag_days: 3                 # ... that were already observed at issue time (checked on load)
+  gamma: 0.005                # adaptive conformal inference step size (0 = plain CQR)
+  mondrian: true              # calibrate forecast-clear, -mixed and -cloudy days separately
+  report_levels: [0.8, 0.9]
+
+backtest:
+  start: "2025-01-01"
+  end: "2025-12-31"
+  retrain_every_days: 30      # LightGBM is retrained once a month
+
+pv:
+  dc_ac_ratio: 1.2            # used when only one of DC/AC capacity is published
+  system_losses: 0.14         # wiring, mismatch, soiling, availability (PVWatts default)
+  gamma_pdc: -0.004           # module power temperature coefficient (1/°C)
+  albedo: 0.3                 # desert ground is brighter than the 0.2 default
+  transposition_model: haydavies
+
+battery:                      # an illustrative battery attached to each plant
+  energy_hours: 1.0           # MWh of storage per MW of plant AC capacity
+  power_ratio: 0.5            # MW of battery power per MW of plant AC capacity
+  efficiency_roundtrip: 0.88
+  initial_soc: 0.5            # fraction of energy capacity at midnight
+  price: 1.0                  # value of 1 MWh delivered as committed (cost units)
+  shortfall_penalty: 3.0      # cost of 1 MWh missing from the commitment (gas backup)
+  n_scenarios: 30
+  scenario_correlation: 0.8   # hour-to-hour correlation of forecast errors

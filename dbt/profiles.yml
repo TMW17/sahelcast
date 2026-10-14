@@ -1,0 +1,18 @@
+# dbt connects to DuckDB and attaches the DuckLake catalog as the database "lake".
+# The paths come from environment variables that `sahelcast transform` sets for you.
+sahelcast:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('SAHELCAST_DBT_DB', '../data/dbt.duckdb') }}"
+      schema: main
+      threads: 1                      # DuckLake with a DuckDB catalog has a single writer
+      extensions: [ducklake]
+      settings:
+        TimeZone: UTC
+      attach:
+        - path: "ducklake:{{ env_var('SAHELCAST_LAKE_METADATA', '../data/lake/metadata.ducklake') }}"
+          alias: lake
+          options:
+            data_path: "{{ env_var('SAHELCAST_LAKE_DATA', '../data/lake/files/') }}"

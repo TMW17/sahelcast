@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest   # standard runners are free for public repositories
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install (without the optional Chronos-2 / PyTorch extra, to stay fast)
+        run: uv sync
+      - name: Lint
+        run: uv run ruff check src tests
+      - name: Tests, including the offline end-to-end pipeline
+        run: uv run pytest

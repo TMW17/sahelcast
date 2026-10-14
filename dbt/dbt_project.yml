@@ -1,0 +1,28 @@
+name: sahelcast
+version: "1.0.0"
+config-version: 2
+profile: sahelcast
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+flags:
+  send_anonymous_usage_stats: false   # dbt sends no usage events
+
+vars:
+  nwp_model: ecmwf_ifs025
+  satellite_model: eumetsat_sarah3
+  reanalysis_model: best_match
+  lead_days: [1, 2]
+
+models:
+  sahelcast:
+    +database: lake          # write every model into the DuckLake catalog
+    +materialized: table
+    silver:
+      +schema: silver
+    gold:
+      +schema: gold

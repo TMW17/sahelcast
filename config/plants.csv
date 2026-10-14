@@ -1,0 +1,11 @@
+plant_id,name,wilaya,latitude,longitude,capacity_mw,capacity_basis,commissioned,status,coord_quality,tilt_deg,azimuth_deg,source
+adrar_1,Adrar,Adrar,27.9077,-0.3174,20,MWp,2015,operating,exact,30,180,Global Energy Monitor wiki (gem.wiki)
+ain_el_ibel_1,Ain El Ibel I,Djelfa,34.3447,3.1636,20,MW,2016,operating,exact,30,180,https://www.gem.wiki/Ain_El_Ibel_Solar
+ain_el_ibel_2,Ain El Ibel II,Djelfa,34.3433,3.1696,33,MW,2017,operating,exact,30,180,https://www.gem.wiki/Ain_El_Ibel_Solar
+el_kheneg_1,El Kheneg I (Laghouat),Laghouat,33.7298,2.8164,20,MW,2016,operating,exact,30,180,Global Energy Monitor wiki (gem.wiki)
+el_kheneg_2,El Kheneg II (Laghouat),Laghouat,33.7249,2.8071,40,MW,2017,operating,exact,30,180,Global Energy Monitor wiki (gem.wiki)
+oued_el_kebrit,Oued El Kebrit,Souk Ahras,35.9194,7.8711,15,MWp,2016,operating,exact,30,180,Global Energy Monitor wiki (gem.wiki)
+tamanrasset,Tamanrasset,Tamanrasset,22.8494,5.4505,12.2,MWac,2017,operating,exact,30,180,Global Energy Monitor wiki (gem.wiki)
+telagh,Telagh,Sidi Bel Abbes,34.6919,-0.6014,11.2,MWac,2017,operating,exact,30,180,Global Energy Monitor wiki (gem.wiki)
+el_abiodh_sidi_cheikh,El Abiodh Sidi Cheikh,El Bayadh,32.9451,0.5536,23,MW,2016,operating,exact,30,180,Global Energy Monitor wiki (gem.wiki)
+tendla,Tendla,El M'Ghaier,33.7022,5.8055,200,MW,2026,commissioned,approximate,30,180,https://www.enerdata.net/publications/daily-energy-news/algeria-commissions-two-solar-pv-plants-totalling-400-mw.html

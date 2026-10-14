@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_plants
+    description: One row per plant, with capacities in MW and elevation in metres.
+    columns:
+      - name: plant_id
+        data_tests: [unique, not_null]
+      - name: ac_mw
+        data_tests: [not_null]
+      - name: wilaya
+        data_tests: [not_null]
+
+  - name: stg_nwp
+    description: Cleaned past forecasts from the Previous Runs API.
+    columns:
+      - name: lead_day
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5, 6, 7]
+                quote: false
+
+  - name: stg_satellite
+    description: Satellite irradiance with a quality flag (qc_ok).
+    columns:
+      - name: qc_ok
+        data_tests: [not_null]
+
+  - name: stg_reanalysis
+    description: Temperature and wind speed from reanalysis.
+
+  - name: fct_hourly
+    description: >
+      One row per plant and hour, joining satellite observations, reanalysis and the NWP
+      forecasts made 1 and 2 days ahead. physics.py reads this table.
+    columns:
+      - name: plant_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_plants')
+                field: plant_id
+      - name: valid_time
+        description: End of the hour the values describe (UTC). 12:00 = 11:00–12:00.
+        data_tests: [not_null]

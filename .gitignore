@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Data and outputs (rebuild them with `make pipeline`)
+data/
+site/
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/.user.yml
+logs/
+
+# Dagster
+.dagster_home/
+tmp*/
+
+# macOS
+.DS_Store
+.venv
+.venv.nosync/

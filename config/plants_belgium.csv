@@ -1,0 +1,7 @@
+plant_id,name,country,wilaya,latitude,longitude,capacity_mw,capacity_basis,commissioned,status,coord_quality,tilt_deg,azimuth_deg,source
+antwerp,Antwerp area,BE,Antwerp,51.2194,4.4025,100,MWac,,virtual,approximate,35,180,Representative point for the Elia benchmark (equal weights; refine with Elia regional capacity)
+ghent,Ghent area,BE,East-Flanders,51.0543,3.7174,100,MWac,,virtual,approximate,35,180,Representative point for the Elia benchmark
+bruges,Bruges area,BE,West-Flanders,51.2093,3.2247,100,MWac,,virtual,approximate,35,180,Representative point for the Elia benchmark
+hasselt,Hasselt area,BE,Limburg,50.9307,5.3325,100,MWac,,virtual,approximate,35,180,Representative point for the Elia benchmark
+charleroi,Charleroi area,BE,Hainaut,50.4108,4.4446,100,MWac,,virtual,approximate,35,180,Representative point for the Elia benchmark
+liege,Liege area,BE,Liege,50.6326,5.5797,100,MWac,,virtual,approximate,35,180,Representative point for the Elia benchmark

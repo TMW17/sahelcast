@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: Raw data loaded by `sahelcast ingest` (see src/sahelcast/ingest.py).
+    database: lake
+    schema: bronze
+    tables:
+      - name: plants
+        description: The plant registry, copied from config/plants.csv.
+      - name: site_elevation
+        description: Ground elevation per plant, as returned by Open-Meteo.
+      - name: nwp_previous_runs
+        description: Past weather forecasts from the Open-Meteo Previous Runs API, one row per lead day.
+      - name: satellite
+        description: Satellite-derived irradiance from the Open-Meteo Satellite Radiation API.
+      - name: reanalysis
+        description: Air temperature and wind speed from the Open-Meteo Historical Weather API.
