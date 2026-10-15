@@ -2,6 +2,8 @@
 
 [![ci](https://github.com/TMW17/sahelcast/actions/workflows/ci.yml/badge.svg)](https://github.com/TMW17/sahelcast/actions/workflows/ci.yml)
 
+**Live results page:** https://tmw17.github.io/sahelcast/
+
 **Day-ahead solar power forecasts with calibrated uncertainty for Algerian PV plants, and what they are worth for battery scheduling.**
 
 SahelCast collects weather forecasts (as they were issued) and satellite irradiance for Algeria's
