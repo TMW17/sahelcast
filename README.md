@@ -1,5 +1,7 @@
 # SahelCast
 
+[![ci](https://github.com/TMW17/sahelcast/actions/workflows/ci.yml/badge.svg)](https://github.com/TMW17/sahelcast/actions/workflows/ci.yml)
+
 **Day-ahead solar power forecasts with calibrated uncertainty for Algerian PV plants, and what they are worth for battery scheduling.**
 
 SahelCast collects weather forecasts (as they were issued) and satellite irradiance for Algeria's
@@ -32,7 +34,7 @@ Open-Meteo APIs ──► bronze (DuckLake) ──► dbt: silver, gold ──�
 
 ```bash
 brew install uv libomp          # macOS (Linux: curl -LsSf https://astral.sh/uv/install.sh | sh)
-git clone https://github.com/<you>/sahelcast && cd sahelcast
+git clone https://github.com/TMW17/sahelcast && cd sahelcast
 make setup                      # installs everything with uv
 make demo                       # full pipeline offline on synthetic data (about 4 minutes)
 open data/demo/site/index.html
